@@ -19,11 +19,6 @@ Parameters:
     AllowedPattern: (?!-)[a-zA-Z0-9-.]{1,63}(?<!-)
     ConstraintDescription: must be a valid DNS zone name.
     Default: keycloackngnx.mehmetafsar.net
-  PortFrontend:
-    Description: EMail address to notify if there are any scaling operations
-    Type: String
-    ConstraintDescription: must be a valid .
-    Default: 9000
   OperatorEMail:
     Description: EMail address to notify if there are any scaling operations
     Type: String
@@ -118,6 +113,7 @@ Resources:
         Fn::Base64: 
           !Sub |
             #! /bin/bash -xe
+            exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
             apt update -y
             apt install docker.io -y
             systemctl start docker
@@ -132,8 +128,9 @@ Resources:
             cd /srv/docker/keycloak/data/certs/
             openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout keycloak.key -out keycloak.crt -subj "/C=US/ST=California/L=San Francisco/O=Keycloak/OU=Keycloak/CN=${FullDomainFrontend}"
             chmod 755 /srv/docker/keycloak/data/certs/keycloak.*
+            cd /home/ubuntu
             git clone https://github.com/mehmetafsar510/keycloak.git
-            cd keycloak/docker-compose-ssl
+            cd /home/ubuntu/keycloak/docker-compose-ssl
             sed -i "s/{FQDN}/${FullDomainFrontend}/g" letsencrypt.sh
             sed -i "s/{FQDN}/${FullDomainFrontend}/g" docker-compose.yml
             sed -i "s/{FQDN}/${FullDomainFrontend}/g" /home/ubuntu/keycloak/docker-compose-ssl/data/nginx/app.conf
