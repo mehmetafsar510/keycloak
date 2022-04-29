@@ -133,7 +133,11 @@ Resources:
             openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout keycloak.key -out keycloak.crt -subj "/C=US/ST=California/L=San Francisco/O=Keycloak/OU=Keycloak/CN=${FullDomainFrontend}"
             chmod 755 /srv/docker/keycloak/data/certs/keycloak.*
             git clone https://github.com/mehmetafsar510/keycloak.git
-            cd keycloak
+            cd keycloak/docker-compose-ssl
+            sed -i "s/{FQDN}/${FullDomainFrontend}/g" letsencrypt.sh
+            sed -i "s/{FQDN}/${FullDomainFrontend}/g" docker-compose.yml
+            sed -i "s/{FQDN}/${FullDomainFrontend}/g" /home/ubuntu/keycloak/docker-compose-ssl/data/nginx/app.conf
+            bash letsencrypt.sh
             docker-compose up -d
             
             
