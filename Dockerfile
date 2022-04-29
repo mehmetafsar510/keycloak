@@ -14,7 +14,7 @@ ENV KEYCLOAK_ADMIN_PASSWORD=admin
 ENV KC_DB_URL=jdbc:postgresql://postgres:5432/keycloak?ssl=allow
 ENV KC_DB_USERNAME=keycloak
 ENV KC_DB_PASSWORD=keycloak
-ENV KC_HOSTNAME=keycloak.mehmetafsar.net
+ENV KC_HOSTNAME=keycloackngnx.mehmetafsar.net
 ENV KC_HOSTNAME_STRICT=false
 ENV KC_HTTP_ENABLED=true
 ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start"]
