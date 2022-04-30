@@ -132,8 +132,9 @@ Resources:
             git clone https://github.com/mehmetafsar510/keycloak.git
             cd /home/ubuntu/keycloak/docker-compose-ssl
             sed -i "s/{FQDN}/${FullDomainFrontend}/g" letsencrypt.sh
-            sed -i "s/{FQDN}/${FullDomainFrontend}/g" docker-compose.yml
+            sed -i "s/{FQDN}/${FullDomainFrontend}/g" docker-compose.yaml
             sed -i "s/{FQDN}/${FullDomainFrontend}/g" /home/ubuntu/keycloak/docker-compose-ssl/data/nginx/app.conf
+            chmod 755 letsencrypt.sh
             bash letsencrypt.sh
             docker-compose up -d
             
