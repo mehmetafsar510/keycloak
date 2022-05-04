@@ -22,9 +22,10 @@ a {
 div#kc-header::after {
     padding-top: 3px;
     content: 'Mehmet Work Force Management';
-    font-size: 40px;
-    line-height: 50px;
+    font-size: 30px;
+    line-height: 30px;
     margin-bottom: 15px;
+    
 }
 
 div#kc-info {
@@ -38,6 +39,7 @@ div#kc-header {
     padding-bottom: 2.5em;
     padding-right: 2em;
     padding-left: 3em;
+    font-size: 10px;
 }
 
 div#kc-content {
