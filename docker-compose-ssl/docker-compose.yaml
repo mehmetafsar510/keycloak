@@ -54,6 +54,7 @@ services:
         - "/srv/docker/keycloak/data/certs/keycloak.crt:/etc/x509/https/tls.crt"
         - ./keycloak/scripts/disable-theme-cache.cli:/opt/jboss/startup-scripts/disable-theme-cache.cli
         - ./keycloak/themes/custom:/opt/jboss/keycloak/themes/custom
+        - ./keycloak/themes/mehmet:/opt/jboss/keycloak/themes/mehmet
         - ./keycloak/realms/realm-export.json:/tmp/realm-export.json
       ports:
         - "8443:8443"
